@@ -21,7 +21,7 @@ public class Main {
         author.setCountry("Türkiye");
         author.setDate(LocalDate.ofEpochDay(2024-01-01));
         author.setName("Deneme");
-        author.setBook_id(1);
+        author.setId(1);
 
         entityManager.persist(author);
 

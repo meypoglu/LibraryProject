@@ -1,6 +1,7 @@
 package dev.patika;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,19 +25,21 @@ public class Book {
     @Column(name = "book_stock", nullable = false)
     private int stock;
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Borrow> borrowList;
 
-    @OneToMany(mappedBy = "publisher")
-    private List<Publisher> publisherList;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "publisher_id")
+    private Publisher publisher;
 
-    @OneToMany(mappedBy = "author")
-    private List<Author> authorList;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id")
+    private Author author;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "bookToCategory",
-            joinColumns = {@JoinColumn(name = "bookToCategory_book_id") },
-            inverseJoinColumns = {@JoinColumn(name = "bookToCategory_category_id")})
+            joinColumns = {@JoinColumn(name = "book_id") },
+            inverseJoinColumns = {@JoinColumn(name = "category_id")})
     private List<Category> categoryList;
 
 
@@ -78,22 +81,6 @@ public class Book {
 
     public void setBorrowList(List<Borrow> borrowList) {
         this.borrowList = borrowList;
-    }
-
-    public List<Publisher> getPublisherList() {
-        return publisherList;
-    }
-
-    public void setPublisherList(List<Publisher> publisherList) {
-        this.publisherList = publisherList;
-    }
-
-    public List<Author> getAuthorList() {
-        return authorList;
-    }
-
-    public void setAuthorList(List<Author> authorList) {
-        this.authorList = authorList;
     }
 
     public List<Category> getCategoryList() {

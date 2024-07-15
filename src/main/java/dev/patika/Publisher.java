@@ -3,6 +3,7 @@ package dev.patika;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "publishers")
@@ -27,9 +28,9 @@ public class Publisher {
     @Column(name = "publisher_book_id", nullable = false)
     private int book_id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "publisher_book_id", referencedColumnName = "book_id")
-    private Book book;
+    @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL)
+    private List<Book> books;
+
 
     public int getId() {
         return id;
@@ -61,14 +62,6 @@ public class Publisher {
 
     public void setAddress(int address) {
         this.address = address;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
     }
 
     public int getBook_id() {

@@ -23,7 +23,7 @@ public class Category {
     @Column(name = "category_book_id", nullable = false)
     private int book_id;
 
-    @ManyToMany(mappedBy = "categoryList")
+    @ManyToMany(mappedBy = "categoryList", fetch = FetchType.LAZY)
     private List<Book> bookList;
 
     public int getId() {

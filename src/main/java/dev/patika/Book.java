@@ -33,7 +33,7 @@ public class Book {
     @OneToMany(mappedBy = "author")
     private List<Author> authorList;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "bookToCategory",
             joinColumns = {@JoinColumn(name = "bookToCategory_book_id") },
             inverseJoinColumns = {@JoinColumn(name = "bookToCategory_category_id")})

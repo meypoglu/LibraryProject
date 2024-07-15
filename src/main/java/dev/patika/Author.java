@@ -27,7 +27,7 @@ public class Author {
     @Column(name = "author_book_id", nullable = false)
     private int book_id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_book_id", referencedColumnName = "book_id")
     private Book book;
 

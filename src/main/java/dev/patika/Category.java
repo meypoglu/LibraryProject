@@ -2,6 +2,7 @@ package dev.patika;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,12 +20,8 @@ public class Category {
     @Column(name = "category_description", nullable = false)
     private String description;
 
-    @Id
-    @Column(name = "category_book_id", nullable = false)
-    private int book_id;
-
     @ManyToMany(mappedBy = "categoryList", fetch = FetchType.LAZY)
-    private List<Book> bookList;
+    private List<Book> bookList = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -48,14 +45,6 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getBook_id() {
-        return book_id;
-    }
-
-    public void setBook_id(int book_id) {
-        this.book_id = book_id;
     }
 
     public List<Book> getBookList() {

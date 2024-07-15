@@ -26,7 +26,7 @@ public class Author {
     private String country;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    private List<Book> books;
+    private List<Book> books = new ArrayList<>();
 
 
     public int getId() {

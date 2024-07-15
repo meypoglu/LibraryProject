@@ -3,6 +3,7 @@ package dev.patika;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,14 +23,10 @@ public class Publisher {
     private LocalDate date;
 
     @Column(name = "publisher_address", nullable = false)
-    private int address;
-
-    @Id
-    @Column(name = "publisher_book_id", nullable = false)
-    private int book_id;
+    private String address;
 
     @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL)
-    private List<Book> books;
+    private List<Book> books = new ArrayList<>();
 
 
     public int getId() {
@@ -56,19 +53,19 @@ public class Publisher {
         this.date = date;
     }
 
-    public int getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(int address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public int getBook_id() {
-        return book_id;
+    public List<Book> getBooks() {
+        return books;
     }
 
-    public void setBook_id(int book_id) {
-        this.book_id = book_id;
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }

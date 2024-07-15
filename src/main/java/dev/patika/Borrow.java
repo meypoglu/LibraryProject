@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class Borrow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "borrow_id", nullable = false)
+    @Column(name = "book_borrow_id", nullable = false)
     private int id;
 
     @Column(name = "borrow_name", nullable = false)
@@ -24,12 +24,8 @@ public class Borrow {
     @Column(name = "borrow_return_date", nullable = false)
     private LocalDate returnDate;
 
-    @Id
-    @Column(name = "borrow_book_id", nullable = false)
-    private int book_id;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "borrow_book_id", referencedColumnName = "book_id")
+    @JoinColumn(name = "book_id")
     private Book book;
 
     public int getId() {
@@ -62,14 +58,6 @@ public class Borrow {
 
     public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
-    }
-
-    public int getBook_id() {
-        return book_id;
-    }
-
-    public void setBook_id(int book_id) {
-        this.book_id = book_id;
     }
 
     public Book getBook() {

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,7 +27,7 @@ public class Book {
     private int stock;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Borrow> borrowList;
+    private List<Borrow> borrowList = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "publisher_id")
@@ -40,7 +41,7 @@ public class Book {
     @JoinTable(name = "bookToCategory",
             joinColumns = {@JoinColumn(name = "book_id") },
             inverseJoinColumns = {@JoinColumn(name = "category_id")})
-    private List<Category> categoryList;
+    private List<Category> categoryList = new ArrayList<>();
 
 
     public int getId() {
@@ -89,5 +90,21 @@ public class Book {
 
     public void setCategoryList(List<Category> categoryList) {
         this.categoryList = categoryList;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 }
